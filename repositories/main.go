@@ -1,26 +1,32 @@
 package repositories
 
-import database "github.com/cjlapao/common-go/database/mongo"
+import (
+	database "github.com/cjlapao/common-go/database/mongo"
+	"github.com/cjlapao/common-go/executionctx"
+)
 
 // Collection
 const (
-	ArticlesCollectionName = "articles"
-	PeopleCollectionName   = "people"
-	VehicleCollectionName  = "vehicles"
-	StarshipCOllectionName = "starships"
-	UsersCollectionName    = "users"
+	UsersCollectionName    = "Users"
+	CampainsCollectionName = "Campains"
 )
 
 // Repository Entity
 type Repository struct {
-	Factory *database.MongoFactory
+	Factory    *database.MongoFactory
+	Repository database.Repository
 }
 
 // NewRepo Creates a new Article Repository object
-func NewRepo(factory *database.MongoFactory) Repository {
+func NewRepository(collectionName string) *Repository {
+	svc := executionctx.GetServiceProvider()
+	connStr := svc.Context.Configuration.GetString("MONGODB_CONNECTION_STRING")
+	databaseName := svc.Context.Configuration.GetString("MONGODB_DATABASENAME")
 	result := Repository{
-		Factory: factory,
+		Factory: database.NewFactory(connStr).WithDatabase(databaseName),
 	}
 
-	return result
+	result.Repository = database.NewRepository(result.Factory, databaseName, collectionName)
+
+	return &result
 }

@@ -1,24 +1,13 @@
 package repositories
 
-import (
-	"context"
-	"time"
+var _userRepository *Repository
 
-	"github.com/cjlapao/phishing-email-backend/entities"
-	"go.mongodb.org/mongo-driver/bson"
-)
+func UserRepository() *Repository {
+	if _userRepository != nil {
+		return _userRepository
+	}
 
-// GetUserByEmail Gets a record by ID
-func (a *Repository) GetUserByEmail(email string) entities.User {
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+	_userRepository = NewRepository(UsersCollectionName)
 
-	var user entities.User
-
-	filter := bson.D{{Key: "email", Value: email}}
-	collection := a.Factory.Database.Collection(UsersCollectionName)
-
-	collection.FindOne(ctx, filter).Decode(&user)
-
-	return user
+	return _userRepository
 }

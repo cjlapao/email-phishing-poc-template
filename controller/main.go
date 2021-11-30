@@ -5,8 +5,11 @@ import "github.com/cjlapao/common-go/restapi"
 var listener *restapi.HttpListener
 
 func Init() {
+	userCtx := UserContext{}
 	listener = restapi.GetHttpListener()
-	listener.AddLogger().AddAuthentication().AddHealthCheck()
+	listener.WithAuthentication(userCtx).AddLogger().AddHealthCheck()
 	listener.AddController(TestController, "/test", "GET")
+
+	listener.AddAuthorizedController(AuthTestController, "/auth/test", "GET")
 	listener.Start()
 }
