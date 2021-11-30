@@ -37,7 +37,7 @@ func GetRepository() mongodb.Repository {
 		connStr := svc.Context.Configuration.GetString("MONGODB_CONNECTION_STRING")
 		databaseName := svc.Context.Configuration.GetString("MONGODB_DATABASENAME")
 		_factory = mongodb.NewFactory(connStr).WithDatabase(databaseName)
-		_userRepo = mongodb.NewRepository(_factory, "test", identity.IdentityCollection)
+		_userRepo = mongodb.NewRepository(_factory, "test", identity.IdentityUsersCollection)
 	}
 
 	return _userRepo
