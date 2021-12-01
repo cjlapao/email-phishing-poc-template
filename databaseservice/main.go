@@ -1,7 +1,7 @@
 package databaseservice
 
 import (
-	mongodb "github.com/cjlapao/common-go/database/mongo"
+	"github.com/cjlapao/common-go/database/mongodb"
 	"github.com/cjlapao/common-go/executionctx"
 )
 

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	mongodb "github.com/cjlapao/common-go/database/mongo"
+	"github.com/cjlapao/common-go/database/mongodb"
 	"github.com/cjlapao/common-go/executionctx"
 	"github.com/cjlapao/common-go/identity"
 )

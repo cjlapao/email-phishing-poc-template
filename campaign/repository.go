@@ -1,7 +1,7 @@
 package campaign
 
 import (
-	mongodb "github.com/cjlapao/common-go/database/mongo"
+	"github.com/cjlapao/common-go/database/mongodb"
 	"github.com/cjlapao/phishing-email-backend/constants"
 	"github.com/cjlapao/phishing-email-backend/databaseservice"
 	"github.com/google/uuid"
@@ -45,8 +45,9 @@ func (c *CampaignRepository) Upsert(campaign Campaign) bool {
 	if campaign.ID == "" {
 		campaign.ID = uuid.NewString()
 	}
-
-	updateResult := c.Collection.UpsertOne("_id", campaign.ID, campaign)
+	filter := make(map[string]interface{})
+	filter["_id"] = campaign.ID
+	updateResult := c.Collection.UpsertOne(filter, campaign)
 
 	return updateResult.UpsertedCount == 1
 }
