@@ -2,7 +2,7 @@ module github.com/cjlapao/phishing-email-backend
 
 go 1.17
 
-replace github.com/cjlapao/common-go => ../common-go
+replace github.com/cjlapao/common-go => ../../common-go
 
 require (
 	github.com/cjlapao/common-go v0.0.13

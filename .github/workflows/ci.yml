@@ -44,6 +44,7 @@ jobs:
         GOOS: linux
         GOARCH: amd64
       run: go build -o ${{ github.event.repository.name }}
+      working-directory: ./go-poc
     - name: Zip Linux x64
       id: zip_linux_x64
       run: |

@@ -6,8 +6,8 @@
       "type": "go",
       "request": "launch",
       "mode": "debug",
-      "program": "${workspaceFolder}/main.go",
-      "envFile": "${workspaceFolder}/.env",
+      "program": "${workspaceFolder}/go-poc/main.go",
+      "envFile": "${workspaceFolder}/go-poc/.env",
       "args": []
     }
   ]
