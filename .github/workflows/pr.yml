@@ -1,14 +1,17 @@
-name: Build
+name: PR Builder
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
 jobs:
   build:
+    name: PR Build and Test
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'go' ]
     steps:
     - uses: actions/checkout@v2
 
